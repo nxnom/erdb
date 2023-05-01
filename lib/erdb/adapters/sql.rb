@@ -34,7 +34,7 @@ module ERDB
     #
     def to_erdb
       @connection.tables.map do |table|
-        columns = @connection.columns(table).map(&:name)
+        columns = @connection.columns(table).map { |column| { name: column.name, type: column.type } }
         relations = @connection.foreign_keys(table).map do |fk|
           {
             from: {
@@ -74,7 +74,7 @@ module ERDB
       relations = table[:relations]
 
       # remove data like id, created_at, updated_at
-      columns = table[:columns].reject do |column|
+      columns = table[:columns].map { |c| c[:name] }.reject do |column|
         %w[id created_at updated_at].include?(column)
       end
 
