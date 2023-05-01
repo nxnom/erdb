@@ -17,6 +17,8 @@ module ERDB
     # Connect to a database.
     #
     def connect
+      puts "Connecting to #{@adapter} database..."
+
       case @adapter.to_sym
       when :sqlite3
         connect_sqlite3
@@ -33,8 +35,9 @@ module ERDB
     # Convert database tables to ERD convertable Array.
     #
     def to_erdb
+      puts "Analyzing database..."
       @connection.tables.map do |table|
-        columns = @connection.columns(table).map { |column| { name: column.name, type: column.type } }
+        columns = @connection.columns(table).map { |column| { name: column.name, type: column.type || "unknown" } }
         relations = @connection.foreign_keys(table).map do |fk|
           {
             from: {
@@ -78,7 +81,7 @@ module ERDB
         %w[id created_at updated_at].include?(column)
       end
 
-      if relations.size == columns.size
+      if relations.size == columns.size && relations.size >= 2
         columns.include?(relations[0][:from][:column]) && columns.include?(relations[1][:from][:column])
       else
         false
