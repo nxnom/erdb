@@ -11,3 +11,5 @@ gem "rubocop", "~> 1.50"
 gem "watir", "~> 7.2"
 
 gem "sqlite3", "~> 1.6"
+
+gem "clipboard", "~> 1.3"
