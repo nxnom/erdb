@@ -35,6 +35,7 @@ module ERDB
         textarea = browser.textarea(id: "source-editor")
         textarea.click
 
+        old_clipboard = Clipboard.paste
         Clipboard.copy(data)
 
         # set! sometimes doesn't work cuz azimutt automatically reset incorrectly formatted data
@@ -45,6 +46,8 @@ module ERDB
 
         control = Utils.is_mac? ? :command : :control
         browser.send_keys control, "v"
+
+        Clipboard.copy(old_clipboard)
 
         # rubocop:disable Lint/MissingCopEnableDirective
         # rubocop:disable Layout/LineLength

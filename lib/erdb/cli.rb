@@ -21,8 +21,6 @@ module ERDB
 
         db.connect
 
-        puts "\nGenerating ERD..."
-
         erd_builder.create(db.to_erdb)
       rescue RuntimeError => e
         puts "Error: #{e.message}"

@@ -36,11 +36,14 @@ module ERDB
         browser.send_keys control, "a"
         browser.send_keys :delete
 
+        old_clipboard = Clipboard.paste
         # Yep, I know this is ugly.
         # But DBDiagram don't use input element for editor. -_-
         Clipboard.copy(data)
 
         browser.send_keys control, "v"
+
+        Clipboard.copy(old_clipboard)
 
         puts "Enter 'q' to exit."
 
