@@ -1,19 +1,17 @@
+require "clipboard"
 require "watir"
 
 module ERDB
   class Azimutt
     class << self
       #
-      # Generate a new ER Diagram using Azimutt.
+      # Create a new ER Diagram using https://azimutt.app/.
       # @param [Hash] tables
       #
-      def generate(tables)
+      def create(tables)
         converted_data = to_aml(tables)
 
-        puts "### Copy following output to Azimutt if unexpected error happen ###"
-        puts "### Start of output ###\n\n"
-        puts converted_data
-        puts "\n\n### End of output ###"
+        Utils.display_output(converted_data, "Azimutt")
 
         start_automation(converted_data)
       end
@@ -35,10 +33,18 @@ module ERDB
         browser.button(id: "create-project-btn").click
 
         textarea = browser.textarea(id: "source-editor")
+        textarea.click
 
-        # set! sometimes doesn't work
-        # cuz azimutt automatically reset incorrectly formatted data
-        textarea.set(data)
+        Clipboard.copy(data)
+
+        # set! sometimes doesn't work cuz azimutt automatically reset incorrectly formatted data
+        # and set is also slow as hell better to use send_keys
+        # sometime naive is better than smart lol
+        #
+        # textarea.set(data)
+
+        control = Utils.is_mac? ? :command : :control
+        browser.send_keys control, "v"
 
         puts "Enter 'q' to quit."
 
@@ -59,6 +65,11 @@ module ERDB
       def to_aml(tables)
         str = ""
         tables.each_with_index do |table, i|
+          if table[:is_join_table] && ERDB.hide_join_table?
+            str += to_many_to_many_str(table)
+            next
+          end
+
           str += "\n\n" if i.positive?
           str += "#{table[:name]}\n"
           str += table[:columns].map { |c| to_column(c[:name], c[:type]) }.join("\n")
@@ -85,6 +96,29 @@ module ERDB
       #
       def to_column(name, type)
         "  #{name} #{type}"
+      end
+
+      #
+      # Convert a many-to-many table to a AML formatted string.
+      # @param [Hash] table
+      # @return [String]
+      #
+      def to_many_to_many_str(table)
+        str = "\n"
+        relations = Utils.to_many_to_many(table[:relations])
+
+        # Azimutt doesn't support many-to-many relations
+        # so we have to convert it to two one-to-many relations
+        # Really weird but does the job :/
+        relations.each do |relation|
+          relations.each do |other|
+            next if relation == other
+
+            str += "\nfk: #{relation} -> #{other}\n"
+          end
+        end
+
+        str
       end
     end
   end
