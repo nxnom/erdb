@@ -40,20 +40,35 @@ module ERDB
       #
       def select_database
         data = {
-          sqlite3: "SQLite",
-          mysql2: "MySQL",
-          postgresql: "PostgreSQL"
+          sqlite3: { name: "SQLite", gem: "sqlite3" },
+          postgresql: { name: "PostgreSQL(Gem 'pg' must be installed)", gem: "pg" },
+          mysql2: { name: "MySQL(Gem 'mysql2' must be installed)", gem: "mysql2" }
         }
 
         puts "Select a database adapter:"
 
         data.each_with_index do |v, i|
-          puts "#{i + 1}. #{v[1]}"
+          puts "#{i + 1}. #{v[1][:name]}"
         end
 
         response = ask_number(1, data.size)
 
         adapter = data.keys[response.to_i - 1].to_sym
+
+        # check if the gem is installed
+        # I don't want to include the gem in the gemspec file
+        # cuz it's dependencies are too big and depend on the native library
+        # I only include sqlite3 gem cuz it's small and doesn't have any dependencies
+        gem = data[adapter][:gem]
+
+        begin
+          require gem
+        rescue LoadError
+          puts "\nError: '#{gem}' gem is not installed."
+          puts "Please install the gem '#{gem}' first."
+          puts "Run 'gem install #{gem}' to install the gem."
+          exit 1
+        end
 
         database = if adapter == :sqlite3
                      ask_file "\nEnter the path to the database file:"

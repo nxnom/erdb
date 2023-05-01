@@ -46,6 +46,12 @@ module ERDB
         control = Utils.is_mac? ? :command : :control
         browser.send_keys control, "v"
 
+        # rubocop:disable Lint/MissingCopEnableDirective
+        # rubocop:disable Layout/LineLength
+        btn = browser.button(class: "-ml-px rounded-r-md relative inline-flex items-center p-2 border border-gray-300 text-sm font-medium focus:z-10 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 bg-white text-gray-700 hover:bg-gray-50")
+
+        btn.click if btn.exists?
+
         puts "Enter 'q' to exit."
 
         loop do
