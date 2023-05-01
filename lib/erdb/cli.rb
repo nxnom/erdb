@@ -13,29 +13,30 @@ module ERDB
 
         welcome
 
-        provider, database = select_database
+        db = select_database
 
         erd_builder = select_diagram_builder
 
         ERDB.show_join_table = ask_yes_no("\nDo you want to display join tables? (Y/n)", true)
 
-        adapter = SQL.new(provider, database)
-        adapter.connect
-        tables = adapter.to_erdb
+        db.connect
 
         puts "\nGenerating ERD..."
 
-        erd_builder.create(tables)
+        erd_builder.create(db.to_erdb)
       rescue RuntimeError => e
         puts "Error: #{e.message}"
         exit 1
+      rescue Interrupt
+        puts "\n\nThank you for using ERDB!"
+        exit 0
       end
 
       private
 
       #
       # Ask user which database to use.
-      # @return [Array]
+      # @return [Db]
       #
       def select_database
         data = {
@@ -52,20 +53,17 @@ module ERDB
 
         response = ask_number(1, data.size)
 
-        adapter = data.keys[response.to_i - 1].to_s
+        adapter = data.keys[response.to_i - 1].to_sym
 
-        if adapter == "sqlite3"
-          database = ask "\nEnter the path to the database file:"
+        database = if adapter == :sqlite3
+                     ask_file "\nEnter the path to the database file:"
+                   else
+                     ask "\nEnter the database connection string:"
+                   end
 
-          unless File.exist?(database)
-            puts "Error: File not found"
-            exit 1
-          end
-        else
-          database = ask "\nEnter the database connection string:"
-        end
+        return SQL.new(adapter, database) if %i[sqlite3 mysql2 postgresql].include?(adapter)
 
-        [adapter, database]
+        raise "Invalid database adapter"
       end
 
       #
@@ -141,6 +139,15 @@ module ERDB
           end
         end
         response
+      end
+
+      def ask_file(question)
+        loop do
+          file = ask question
+          return file if File.exist?(file)
+
+          puts "Invalid file path"
+        end
       end
 
       #
