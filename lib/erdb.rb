@@ -1,6 +1,7 @@
 require_relative "erdb/cli"
 require_relative "erdb/version"
 require_relative "erdb/utils"
+require_relative "erdb/providers/erd_provider"
 
 module ERDB
   autoload :SQL, File.expand_path("erdb/adapters/sql", __dir__)
@@ -8,7 +9,7 @@ module ERDB
   autoload :DBDiagram, File.expand_path("erdb/providers/dbdiagram", __dir__)
 
   class << self
-    attr_writer :default_timeout, :default_browser, :hide_join_table
+    attr_writer :default_timeout, :default_browser, :show_join_table
 
     #
     # Default wait time for wait methods.
@@ -27,11 +28,11 @@ module ERDB
     end
 
     #
-    # Hide join table from the diagram.
+    # Show join table in the diagram.
     # @return [Boolean]
     #
-    def hide_join_table?
-      @hide_join_table ||= false
+    def show_join_table?
+      @show_join_table.nil? ? true : @show_join_table
     end
   end
 end

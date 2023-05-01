@@ -17,6 +17,7 @@ module ERDB
     # Connect to a database.
     #
     def connect
+      puts "\n"
       puts "Connecting to #{@adapter} database..."
 
       case @adapter.to_sym
@@ -35,7 +36,7 @@ module ERDB
     # Convert database tables to ERD convertable Array.
     #
     def to_erdb
-      puts "Analyzing database..."
+      puts "\nAnalyzing database..."
       @connection.tables.map do |table|
         columns = @connection.columns(table).map { |column| { name: column.name, type: column.type || "unknown" } }
         relations = @connection.foreign_keys(table).map do |fk|

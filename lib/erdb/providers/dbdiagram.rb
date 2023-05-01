@@ -2,7 +2,7 @@ require "clipboard"
 require "watir"
 
 module ERDB
-  class DBDiagram
+  class DBDiagram < ERDProvider
     class << self
       #
       # Create a new ER Diagram using https://dbdiagram.io
@@ -24,7 +24,7 @@ module ERDB
       # @return [void]
       #
       def start_automation(data)
-        browser = Watir::Browser.new
+        browser = Watir::Browser.new(ERDB.default_browser)
 
         browser.goto "https://dbdiagram.io/d"
 
@@ -42,7 +42,7 @@ module ERDB
 
         browser.send_keys control, "v"
 
-        puts "Enter 'q' to quit."
+        puts "Enter 'q' to exit."
 
         loop do
           v = gets.chomp
@@ -61,7 +61,7 @@ module ERDB
       def to_dbdiagram_format(tables)
         str = ""
         tables.each_with_index do |table, i|
-          if table[:is_join_table] && ERDB.hide_join_table?
+          if table[:is_join_table] && !ERDB.show_join_table?
             str += to_many_to_many_str(table)
             next
           end
