@@ -23,6 +23,4 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "watir", "~> 7.2"
   # for windows
   s.add_runtime_dependency "ffi", "~> 1.15" if Gem.win_platform?
-
-  s.development_dependencies "rubocop", "~> 1.50"
 end
