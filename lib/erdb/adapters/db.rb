@@ -27,27 +27,31 @@ module ERDB
     #
     # Convert database tables to ERD convertable Array.
     # @return [Array] The converted hash format. see example result below.
-    #  [
-    #    {
-    #      name: "table_name",
-    #      is_join_table: false,
-    #      columns: ["column_name", "column_name", "column_name"],
-    #      relations: [
-    #        {
-    #          from: {
-    #            table: "table_name",
-    #            column: "column_name"
-    #          },
-    #          to: {
-    #            table: "table_name",
-    #            column: "column_name"
-    #          }
-    #        }
-    #        ...
-    #      ]
-    #    }
-    #    ...
-    #  ]
+    #
+    # @example Example result:
+    # ```ruby
+    # [
+    #   {
+    #     name: "table_name",
+    #     is_join_table: false,
+    #     columns: ["column_name", "column_name", "column_name"],
+    #     relations: [
+    #       {
+    #         from: {
+    #           table: "table_name",
+    #           column: "column_name"
+    #         },
+    #         to: {
+    #           table: "table_name",
+    #           column: "column_name"
+    #         }
+    #       }
+    #       ...
+    #     ]
+    #   }
+    #   ...
+    # ]
+    #  ```
     #
     def to_erdb
       raise "[to_erdb] Not implemented."

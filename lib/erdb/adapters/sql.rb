@@ -5,9 +5,6 @@ module ERDB
   class SQL < Db
     #
     # Initialize a new SQL instance.
-    # @param adapter [String] The adapter to use.
-    # @param database [String] The database to connect to.
-    # @return [void]
     #
     def initialize(adapter, database)
       super
