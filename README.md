@@ -63,7 +63,6 @@ If I want to generate local database using `Azimutt`, I have to setup `Azimutt` 
 - [x] Generate ERD using Azimutt
 - [x] Generate ERD using DBDiagram
 - [ ] Support `MongoDB` database.
-- [ ] Generate ERD using Graphviz
 
 ## Contributing
 
