@@ -19,6 +19,10 @@ Metrics/ClassLength:
 Metrics/BlockLength:
   AllowedMethods: ["describe"]
   Max: 30
+Metrics/CyclomaticComplexity:
+  Max: 20
+Metrics/PerceivedComplexity:
+  Max: 20
 
 Style/Documentation:
   Enabled: false
@@ -53,4 +57,7 @@ Style/HashEachMethods:
 Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
+  Enabled: false
+
+Naming/PredicateName:
   Enabled: false
