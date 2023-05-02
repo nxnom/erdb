@@ -1,5 +1,9 @@
 ### 1.0.1
 
+- Prioritize Interruption over Error cuz ActiveRecord is lazy load.
+
+### 1.0.1
+
 - Catch database error at runtime
 
 ### 1.0.0

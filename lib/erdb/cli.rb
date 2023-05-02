@@ -22,6 +22,9 @@ module ERDB
         db.connect
 
         erd_builder.create(db.to_erdb)
+      rescue Interrupt
+        puts "\n\nThank you for using ERDB!"
+        exit 0
       rescue ActiveRecord::NoDatabaseError
         puts "\nError: Database not found."
         puts "Please make sure the database exists."
@@ -29,9 +32,6 @@ module ERDB
       rescue StandardError => e
         puts "Error: #{e.message}"
         exit 1
-      rescue Interrupt
-        puts "\n\nThank you for using ERDB!"
-        exit 0
       end
 
       private
