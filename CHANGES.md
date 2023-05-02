@@ -1,3 +1,7 @@
+### 1.0.1
+
+- Catch database error at runtime
+
 ### 1.0.0
 
 - Initial release
