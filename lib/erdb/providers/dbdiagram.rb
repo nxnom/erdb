@@ -24,8 +24,6 @@ module ERDB
       # @return [void]
       #
       def start_automation(data)
-        browser = Watir::Browser.new(ERDB.default_browser)
-
         browser.goto "https://dbdiagram.io/d"
 
         editor = browser.div(class: "view-lines monaco-mouse-cursor-text")
@@ -45,14 +43,7 @@ module ERDB
 
         Clipboard.copy(old_clipboard)
 
-        puts "Enter 'q' to exit."
-
-        loop do
-          v = gets.chomp
-          break if v == "q"
-        end
-
-        browser.close
+        wait_to_quit
       end
 
       #

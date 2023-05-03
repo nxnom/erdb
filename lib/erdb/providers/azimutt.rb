@@ -24,8 +24,6 @@ module ERDB
       # @return [void]
       #
       def start_automation(data)
-        browser = Watir::Browser.new(ERDB.default_browser)
-
         browser.goto "https://azimutt.app/new"
 
         browser.span(text: "From scratch (db design)").click
@@ -55,14 +53,7 @@ module ERDB
 
         btn.click if btn.exists?
 
-        puts "Enter 'q' to exit."
-
-        loop do
-          v = gets.chomp
-          break if v == "q"
-        end
-
-        browser.close
+        wait_to_quit
       end
 
       #
