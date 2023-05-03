@@ -9,7 +9,7 @@ module ERDB
   autoload :DBDiagram, File.expand_path("erdb/providers/dbdiagram", __dir__)
 
   class << self
-    attr_writer :default_timeout, :default_browser, :show_join_table
+    attr_writer :default_timeout, :default_browser, :show_junction_table
 
     #
     # Default wait time for wait methods.
@@ -28,11 +28,11 @@ module ERDB
     end
 
     #
-    # Show join table in the diagram.
+    # Show junction table in the diagram.
     # @return [Boolean]
     #
-    def show_join_table?
-      @show_join_table.nil? ? true : @show_join_table
+    def show_junction_table
+      @show_junction_table.nil? ? true : @show_junction_table
     end
   end
 end

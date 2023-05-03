@@ -65,7 +65,7 @@ module ERDB
       def to_aml(tables)
         str = ""
         tables.each_with_index do |table, i|
-          if table[:is_join_table] && !ERDB.show_join_table?
+          if table[:is_junction_table] && !ERDB.show_junction_table
             str += to_many_to_many_str(table)
             next
           end

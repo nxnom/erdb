@@ -53,7 +53,7 @@ module ERDB
         end
 
         hash = { name: table, columns: columns, relations: relations }
-        hash[:is_join_table] = join_table?(hash)
+        hash[:is_junction_table] = junction_table?(hash)
         hash
       end
     end
@@ -69,12 +69,12 @@ module ERDB
     private
 
     #
-    # Check current table is a join table or not.
+    # Check current table is a junction table or not.
     #
     # @param table [Hash] The table to check.
-    # @return [Boolean] True if the table is a join table, false otherwise.
+    # @return [Boolean] True if the table is a junction table, false otherwise.
     #
-    def join_table?(table)
+    def junction_table?(table)
       relations = table[:relations]
 
       # remove data like id, created_at, updated_at

@@ -33,7 +33,7 @@ module ERDB
     # [
     #   {
     #     name: "table_name",
-    #     is_join_table: false,
+    #     is_junction_table: false,
     #     columns: [{ name: "column_name", type: "column_type" }, ...],
     #     relations: [
     #       {
