@@ -14,3 +14,5 @@ gem "clipboard", "~> 1.3"
 gem "ffi", platforms: %i[mswin mingw] # Required by Clipboard on Windows
 
 gem "rubocop", "~> 1.50", group: :development
+
+gem "thor", "~> 1.2"

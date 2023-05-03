@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "activerecord", "~> 7.0"
   s.add_runtime_dependency "clipboard", "~> 1.3"
   s.add_runtime_dependency "sqlite3", "~> 1.6"
+  s.add_runtime_dependency "thor", "~> 1.2"
   s.add_runtime_dependency "watir", "~> 7.2"
   # for windows
   s.add_runtime_dependency "ffi", "~> 1.15" if Gem.win_platform?
