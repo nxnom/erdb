@@ -1,3 +1,7 @@
+### 1.1.1
+
+- Show `No Tables` error message when there is no tables.
+
 ### 1.1.0
 
 - Use `Thor` to make cli.

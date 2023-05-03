@@ -37,6 +37,9 @@ module ERDB
     #
     def to_erdb
       puts "\nAnalyzing database..."
+
+      raise "No tables found in database." if @connection.tables.empty?
+
       @connection.tables.map do |table|
         columns = @connection.columns(table).map { |column| { name: column.name, type: column.type || "unknown" } }
         relations = @connection.foreign_keys(table).map do |fk|
