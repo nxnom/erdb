@@ -7,10 +7,6 @@ ERDB is just a wrapper to automate the process of generating ERD using -
 - [Azimutt(Open Source)](https://azimutt.app)
 - [DBDiagram](https://dbdiagram.io)
 
-> Currently there is no support for `one-to-one` relationship. If you want to use it you have to manually edit the generated ERD.
-
-<!-- graphviz coming soon -->
-
 ## Demo
 
 ![erdb](./images/erdb.gif)
@@ -28,14 +24,12 @@ Use the package manager [gem](https://rubygems.org/) to install ERDB.
 gem install erdb
 ```
 
-> Important note for Linux users: The clipboard requires the _xsel_ or the _xclip_ command-line program. On debian and ubuntu, _xsel_ can be installed with: `sudo apt-get install xsel`
-> Visit [clipboard](https://github.com/janlelis/clipboard) for more details.
+> Important note for Linux users: You need to install the _xsel_ or the _xclip_ command-line program. On debian and ubuntu, _xsel_ can be installed with: `sudo apt-get install xsel`
+> Visit [clipboard](https://github.com/janlelis/clipboard) for more details about clipboard.
 
 #### Adapters
 
-For `mysql2` and `postgresql` database, you have to install the required gem.
-I didn't include them in the gemspec because I don't want to install them if you don't need them.
-Because it depends on native extensions, you'll need a compiler and the development headers for your Ruby and database.
+For `mysql2` and `postgresql` database, you have to install the required gems.
 
 ```bash
 gem install mysql2
@@ -50,12 +44,15 @@ After install ERDB, you can use `erdb` command to generate ER Diagram.
 erdb
 ```
 
+It use chrome browser by default to genereate ERD. 
+You can use other browser by passing `--browser` option.
+
+> See more options by running `erdb --help`
+
 ## Why I created this gem?
 
 I know there are many tools available for generating ERD,
 but I wanted to create a tool that is easy to use and can be used with any database.
-`Azimutt` also support converting schema to ERD, but it's only working well with remote databases.
-If I want to generate local database using `Azimutt`, I have to setup `Azimutt` locally that is alot of step -\_-
 
 ## Roadmap
 
@@ -66,7 +63,7 @@ If I want to generate local database using `Azimutt`, I have to setup `Azimutt` 
 
 ## Contributing
 
-Pull requests are welcome. Feel free to open an issue first to discuss what you would like to change.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
