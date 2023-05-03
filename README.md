@@ -52,7 +52,8 @@ You can use other browser by passing `--browser` option.
 ## Why I created this gem?
 
 I know there are many tools available for generating ERD,
-but I wanted to create a tool that is easy to use and can be used with any database.
+But I wanted to create a tool that is easy to use and can be used with any database.
+And I don't want to repeat the same steps again and again for generating ERD. -_-
 
 ## Roadmap
 
