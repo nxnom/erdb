@@ -114,7 +114,7 @@ module ERDB
           relations.each do |other|
             next if relation == other
 
-            str += "\nfk: #{relation} -> #{other}\n"
+            str += "\nfk #{relation} -> #{other}\n"
           end
         end
 
