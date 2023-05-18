@@ -60,7 +60,6 @@ And I don't want to repeat the same steps again and again for generating ERD. -_
 - [x] Support `sqlite3`, `mysql2` and `postgresql` database.
 - [x] Generate ERD using Azimutt
 - [x] Generate ERD using DBDiagram
-- [ ] Support `MongoDB` database.
 
 ## Contributing
 
