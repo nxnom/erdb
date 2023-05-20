@@ -55,12 +55,6 @@ I know there are many tools available for generating ERD,
 But I wanted to create a tool that is easy to use and can be used with any database.
 And I don't want to repeat the same steps again and again for generating ERD. -_-
 
-## Roadmap
-
-- [x] Support `sqlite3`, `mysql2` and `postgresql` database.
-- [x] Generate ERD using Azimutt
-- [x] Generate ERD using DBDiagram
-
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
