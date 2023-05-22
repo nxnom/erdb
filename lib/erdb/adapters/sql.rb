@@ -40,7 +40,11 @@ module ERDB
 
       raise "No tables found in database." if @connection.tables.empty?
 
-      @connection.tables.map do |table|
+      tables = @connection.tables.reject do |table|
+        %w[schema_migrations ar_internal_metadata].include?(table)
+      end
+
+      tables.map do |table|
         columns = @connection.columns(table).map { |column| { name: column.name, type: column.type || "unknown" } }
         relations = @connection.foreign_keys(table).map do |fk|
           {

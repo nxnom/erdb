@@ -1,3 +1,7 @@
+### 1.1.2
+
+- Remove metadata table and schema_migrations table from diagram.
+
 ### 1.1.1
 
 - Show `No Tables` error message when there is no tables.
